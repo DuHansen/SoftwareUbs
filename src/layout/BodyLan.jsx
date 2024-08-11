@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import '../App.css';
-import Footer from "../layout/footer";
-import Header from "../layout/header";
+import Footer from "../layout/FooterLan";
+import Header from "../layout/HeaderLan";
 
-export default function Body() {
+export default function BodyLan() {
   return (
     <>
         <Header/>
