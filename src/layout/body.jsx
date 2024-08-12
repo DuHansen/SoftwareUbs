@@ -7,7 +7,16 @@ export default function Body() {
   return (
     <>
         <Header/>
-        <Outlet/>
+        <div style={
+            {
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                width: "100%"
+            }
+        }>
+        <Outlet />
+        </div>
         <Footer/>
     </>
   );

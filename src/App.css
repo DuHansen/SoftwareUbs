@@ -9,7 +9,7 @@
 
 header{
   background-color: #ffffff;
-  color: black;
+  color: #ffffff;
   height: 10vh;
   z-index: 4;
   position: fixed;
@@ -200,5 +200,53 @@ h4{
   }
   #margem{
     margin-top: 0px;
+  }
+}
+
+/* Estilo padrão para telas menores */
+.custom-navbar {
+  position: fixed;
+  display: block;
+  top: 0;
+  width: 100%;
+}
+
+/* Estilo para telas maiores */
+@media (min-width: 992px) {
+  .custom-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Ajuste a largura conforme necessário */
+    height: 100%;
+    justify-content: flex-start;
+  }
+
+  .custom-navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .custom-navbar .navbar-brand {
+    margin-bottom: 1rem;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: none;
+  }
+
+  .custom-navbar .offcanvas {
+    display: none;
+  }
+
+  .custom-navbar .nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .custom-navbar .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 1rem;
   }
 }
