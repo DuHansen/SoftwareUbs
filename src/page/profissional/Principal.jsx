@@ -1,17 +1,18 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap'; // Importando componentes do react-bootstrap
 import { Link } from 'react-router-dom'; // Importa o Link para navegação
+import img from "../../img/logo-whatsapp-sem-fundo 1.png";
 
 export default function Layout() {
   return (
     <Container className="mt-24 flex items-center justify-center min-h-screen">
-      <Row >
+      <Row>
         {/* Primeiro cartão */}
         <Col lg={6} md={12} className="mb-4">
           <Link to="/pagina1" className="block">
-            <Card className="relative h-48 text-white cursor-pointer shadow-lg hover:bg-blue-600 transition-colors" style={{ background: "linear-gradient(to right, blue, white)", border: "2px solid blue" }}>
+            <Card className="relative h-48 text-white cursor-pointer shadow-lg hover:bg-orange-600 transition-colors" style={{ background: "linear-gradient(to right, orange, white)", border: "2px solid orange" }}>
               <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-400 rounded-full"></div>
-              <Card.Body className=" items-center justify-center h-full text-black">
+              <Card.Body className="items-center justify-center h-full text-black">
                 Conversas
               </Card.Body>
             </Card>
@@ -35,8 +36,9 @@ export default function Layout() {
           <Link to="/pagina3" className="block">
             <Card className="relative h-24 text-white cursor-pointer shadow-lg hover:bg-green-600 transition-colors" style={{ background: "linear-gradient(to right, green, white)", border: "2px solid green" }}>
               <div className="absolute top-0 right-0 w-12 h-12 bg-yellow-400 rounded-full"></div>
-              <Card.Body className="flex items-center justify-center h-full text-black">
-                WhatsApp
+              <Card.Body className="flex items-center justify-between h-full text-black">
+               Conectar ao WhatsApp
+                <img src={img} alt="Logo do WhatsApp" className="ml-2" />
               </Card.Body>
             </Card>
           </Link>
