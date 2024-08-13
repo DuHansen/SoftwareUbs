@@ -3,17 +3,17 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import { auth } from "../config/firebase";
 import Body from "../layout/body";
 import BodyLan from "../layout/BodyLan";
-import Perfil from "../page/profissional/home";
+import Agenda from "../page/profissional/agenda";
+import Chamados from "../page/profissional/chamados";
+import Favoritas from "../page/profissional/favoritos";
+import Home from "../page/profissional/home";
 import Index from "../page/profissional/index";
 import Institucional from '../page/profissional/Institucional';
 import Login from "../page/profissional/login";
-import Principal from "../page/profissional/perfilPaciente";
+import Mensagens from "../page/profissional/mensagens";
+import Perfil from '../page/profissional/perfilProfissional';
+import Principal from '../page/profissional/Principal';
 import Dashboard from "../page/profissional/relatorioConsultas";
-import Agenda from "../page/profissional/agenda";
-import Conversa from "../page/profissional/listaPaciente";
-import Favoritas from "../page/profissional/favoritos";
-import Chamados from "../page/profissional/chamados";
-import Home from "../page/profissional/home";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -41,11 +41,12 @@ function App() {
           <Route path="principal" element={<Principal />} />
           <Route path="agenda" element={<Agenda />} />
           <Route path="perfil" element={<Perfil />} />
-          <Route path="conversas" element={<Conversa/>} />
+          <Route path="conversas" element={<Mensagens/>} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="abertos" element={<Chamados />} />
           <Route path="home" element={<Home />} />
           <Route path="favoritas" element={<Favoritas/>} />
+          <Route path="perfilPaciente" element={<Perfil />} />
         </Route>
         
         {/* Rota para lidar com URLs desconhecidas */}
