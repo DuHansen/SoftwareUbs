@@ -269,6 +269,7 @@ h4{
 .footer-navbar {
   color: #fff;
   background-color: #010317; /* Cor de fundo do Navbar */
+ 
 }
 
 .footer-navbar .nav-link {
@@ -277,4 +278,26 @@ h4{
 
 .footer-navbar .nav-link:hover {
   color: #FF914D; /* Cor dos links ao passar o mouse (opcional) */
+}
+
+.custom-toggle-button {
+  background-color: transparent; /* Fundo transparente por padrão */
+  border: 1px solid #000000; /* Cor da borda preta */
+  color: #000000; /* Cor do texto preta */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+  border-radius: 0; /* Remove a borda arredondada se desejar */
+}
+
+/* Define o estilo quando o ToggleButton está selecionado */
+.custom-toggle-button.active, .custom-toggle-button:focus {
+  background-color: #000000; /* Cor de fundo preta quando selecionado */
+  color: #ffffff; /* Cor do texto branca quando selecionado */
+  border-color: #000000; /* Cor da borda preta quando selecionado */
+}
+
+/* Define o estilo quando o ToggleButton está sendo hoverado */
+.custom-toggle-button:hover {
+  background-color: #000000; /* Cor de fundo preta ao passar o mouse */
+  color: #ffffff; /* Cor do texto branca ao passar o mouse */
+  transform: scale(1.05); /* Leve aumento do tamanho do botão */
 }

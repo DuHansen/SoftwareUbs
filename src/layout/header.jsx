@@ -35,7 +35,7 @@ export default function Header() {
                   style={{ color: "#fff", backgroundColor: "#010317", justifyContent: "center", padding: "0px 20px", cursor: "pointer", marginLeft: "30px" }}
                   onClick={toggleHeaderVisibility}
                 >
-                  X
+                  x
                 </Card>
               </div>
             </Navbar.Brand>
@@ -83,6 +83,7 @@ export default function Header() {
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/agenda">Agenda</Nav.Link>
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Relatórios</Nav.Link>
+              <Nav.Link style={{ color: "#ffffff", fontSize: "20px", marginTop: "250px"}} as={Link} to="/">Sair</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
