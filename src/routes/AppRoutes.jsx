@@ -3,12 +3,17 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import { auth } from "../config/firebase";
 import Body from "../layout/body";
 import BodyLan from "../layout/BodyLan";
-import Home from "../page/profissional/home";
+import Perfil from "../page/profissional/home";
 import Index from "../page/profissional/index";
 import Institucional from '../page/profissional/Institucional';
 import Login from "../page/profissional/login";
 import Principal from "../page/profissional/perfilPaciente";
 import Dashboard from "../page/profissional/relatorioConsultas";
+import Agenda from "../page/profissional/agenda";
+import Conversa from "../page/profissional/listaPaciente";
+import Favoritas from "../page/profissional/favoritos";
+import Chamados from "../page/profissional/chamados";
+import Home from "../page/profissional/home";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -34,8 +39,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={currentUser ? <Body /> : <Navigate to="/login" />}>
           <Route path="principal" element={<Principal />} />
-          <Route path="home" element={<Home />} />
+          <Route path="agenda" element={<Agenda />} />
+          <Route path="perfil" element={<Perfil />} />
+          <Route path="conversas" element={<Conversa/>} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="abertos" element={<Chamados />} />
+          <Route path="home" element={<Home />} />
+          <Route path="favoritas" element={<Favoritas/>} />
         </Route>
         
         {/* Rota para lidar com URLs desconhecidas */}

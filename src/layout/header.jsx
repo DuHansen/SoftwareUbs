@@ -55,19 +55,19 @@ export default function Header() {
           <Offcanvas.Body>
             <Nav className="flex-column" style={{ background: "#black", fontSize: "20px",  color: "#ffffff"}}>
               <Nav.Link style={{ color: "black", fontSize: "20px", justifyContent: "center" }} as={Link} to="/principal" onClick={handleClose}>Inicial</Nav.Link>
-              <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/home" onClick={handleClose}>Editar perfil</Nav.Link>
-              <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/dashboard" onClick={handleClose}>Agenda</Nav.Link>
-              <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/dashboard" onClick={handleClose}>Registrar mensagem</Nav.Link>
-              <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/dashboard" onClick={handleClose}>Meus pacientes</Nav.Link>
+              <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/perfil">Editar perfil</Nav.Link>
+          <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/agenda">Agenda</Nav.Link>
+          <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
+          <Nav.Link style={{ color: "black", fontSize: "20px" }} as={Link} to="/dashboard">Relatorios</Nav.Link>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
         <Nav className="d-none d-md-flex flex-column">
           <Nav.Link style={{ color: "#ffffff", fontSize: "20px", justifyContent: "center", alignItems: "center" }} as={Link} to="/principal">Inicial</Nav.Link>
-          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/home">Editar perfil</Nav.Link>
-          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Agenda</Nav.Link>
-          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Registrar mensagem</Nav.Link>
-          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Meus pacientes</Nav.Link>
+          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/perfil">Editar perfil</Nav.Link>
+          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/agenda">Agenda</Nav.Link>
+          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
+          <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Relatorios</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

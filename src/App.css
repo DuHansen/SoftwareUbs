@@ -250,3 +250,31 @@ h4{
     padding: 0.5rem 1rem;
   }
 }
+
+/* Adicione isso ao seu arquivo CSS global */
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1030; /* Ajuste conforme necessário para garantir que fique acima do conteúdo */
+}
+
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.footer-navbar {
+  color: #fff;
+  background-color: #010317; /* Cor de fundo do Navbar */
+}
+
+.footer-navbar .nav-link {
+  color: #fff; /* Cor dos links dentro do Navbar */
+}
+
+.footer-navbar .nav-link:hover {
+  color: #FF914D; /* Cor dos links ao passar o mouse (opcional) */
+}
