@@ -301,3 +301,19 @@ h4{
   color: #ffffff; /* Cor do texto branca ao passar o mouse */
   transform: scale(1.05); /* Leve aumento do tamanho do botão */
 }
+
+.column {
+  width: 200px;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.card {
+  padding: 10px;
+  border: 1px solid #000;
+  background-color: #f9f9f9;
+  cursor: move;
+}
