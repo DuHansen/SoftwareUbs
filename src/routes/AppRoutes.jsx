@@ -14,6 +14,7 @@ import Mensagens from "../page/profissional/mensagens";
 import Perfil from '../page/profissional/perfilProfissional';
 import Principal from '../page/profissional/Principal';
 import Dashboard from "../page/profissional/relatorioConsultas";
+import QrCode from '../page/profissional/gerarQrcode';
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="favoritas" element={<Favoritas/>} />
           <Route path="perfilPaciente" element={<Perfil />} />
+          <Route path="qrcode" element={<QrCode/>}/>
         </Route>
         
         {/* Rota para lidar com URLs desconhecidas */}
