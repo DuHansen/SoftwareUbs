@@ -1,11 +1,50 @@
-import { Container } from "react-bootstrap";
+import React, { useEffect } from 'react'
+import Card from '../../components/ui/button.tsx'
+import AOS from 'aos'
 
+const ContatosLista = [
+  { nome: 'João', ultimaMensagem: 'Olá!', horario: '10:30', imagem: 'link_para_imagem' },
+  { nome: 'Maria', ultimaMensagem: 'Tudo bem?', horario: '11:15', imagem: 'link_para_imagem' },
+  // Adicione mais contatos conforme necessário
+]
 
-export default function Favoritos() {
-    return(
-        
-            <Container style={{marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
-                   <h1>Chamados abertos</h1>
-            </Container>
-    );
+const Contatos = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    })
+  }, [])
+  return (
+    <div style={{ marginTop: 100, overflow: 'hidden'}}
+      id="contatos"
+      className="flex flex-col justify-center items-center align-middle w-100 min-h-[90vh] gap-[5rem] p-4 bg-[#212121]"
+    >
+      <h2
+        className="font-montserrat font-bold text-center text-maincolor text-4xl"
+        data-aos="fade-up"
+      >
+        Contatos
+      </h2>
+      <div
+        className="grid md:grid-cols-2 xl:grid-cols-3 gap-[3rem]"
+        data-aos="slide-up"
+      >
+        {ContatosLista.map(
+          ({ nome, ultimaMensagem, horario, imagem }, index) => {
+            return (
+              <Card
+                key={index}
+                title={nome}
+                subtitle={ultimaMensagem}
+                text={horario}
+                image={imagem}
+              />
+            )
+          },
+        )}
+      </div>
+    </div>
+  )
 }
+
+export default Contatos

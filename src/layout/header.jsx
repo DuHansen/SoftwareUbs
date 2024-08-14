@@ -83,7 +83,7 @@ export default function Header() {
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/agenda">Agenda</Nav.Link>
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
               <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Relatórios</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px", marginTop: "250px"}} as={Link} to="/">Sair</Nav.Link>
+              <Nav.Link style={{ color: "#ffffff", fontSize: "20px", marginTop: "55vh"}} as={Link} to="/">Sair</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
