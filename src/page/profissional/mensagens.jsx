@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
 
 
-export default function QrCode() {
+export default function listaPaciente() {
     return(
         
             <Container style={{marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
-                   WhatsApp
+                  <h1>Conversas</h1> 
             </Container>
     );
 }
