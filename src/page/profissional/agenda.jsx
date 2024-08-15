@@ -1,20 +1,20 @@
-<<<<<<< HEAD
 
-=======
+
+
 import { useEffect } from "react";
->>>>>>> 119c2ad27c7141b048248cfe2078b751da107e3d
+
 import { Container } from "react-bootstrap";
 import "../../App.css";
 
 export default function Agenda() {
-<<<<<<< HEAD
+
     return(
         
             <Container style={{marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
                    <h1>Agenda</h1>
             </Container>
     );
-=======
+
   useEffect(() => {
     const cards = document.querySelectorAll('.card');
     const columns = document.querySelectorAll('.column');
@@ -110,5 +110,5 @@ export default function Agenda() {
       <div className="column" id="column2"></div>
     </Container>
   );
->>>>>>> 119c2ad27c7141b048248cfe2078b751da107e3d
+
 }
