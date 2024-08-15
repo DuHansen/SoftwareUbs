@@ -15,7 +15,7 @@ const Contatos = () => {
     })
   }, [])
   return (
-    <div style={{ marginTop: 100, overflow: 'hidden'}}
+    <div style={{  overflow: 'hidden'}}
       id="contatos"
       className="flex flex-col justify-center items-center align-middle w-100 min-h-[90vh] gap-[5rem] p-4 bg-[#212121]"
     >
@@ -23,7 +23,7 @@ const Contatos = () => {
         className="font-montserrat font-bold text-center text-maincolor text-4xl"
         data-aos="fade-up"
       >
-        Contatos
+        Chamados abertos
       </h2>
       <div
         className="grid md:grid-cols-2 xl:grid-cols-3 gap-[3rem]"

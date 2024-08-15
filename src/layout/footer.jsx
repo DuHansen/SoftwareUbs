@@ -1,53 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import { Link, useLocation } from 'react-router-dom';
-import '../App.css'; // Certifique-se de que seu CSS está importado corretamente
 
-export default function Footer() {
+const Footer = () => {
   const location = useLocation();
-  const [radioValue, setRadioValue] = useState('1');
+  const [selected, setSelected] = useState('/conversas'); // Default value
 
-  const radios = [
-    { name: 'Conversas', value: '1', to: "/conversas" },
-    { name: 'Chamados', value: '2', to: "/abertos" },
-    { name: 'Favoritas', value: '3', to: "/favoritas" },
+  const links = [
+    { name: 'Conversas', path: '/conversas' },
+    { name: 'Chamados', path: '/abertos' },
+    { name: 'Favoritas', path: '/favoritas' },
   ];
 
-  // Atualiza o estado do botão selecionado com base na rota atual
   useEffect(() => {
-    const currentRadio = radios.find(radio => radio.to === location.pathname);
-    if (currentRadio) {
-      setRadioValue(currentRadio.value);
-    } else {
-      setRadioValue(''); // Resetar o estado quando não houver correspondência
-    }
-  }, [location.pathname, radios]);
+    setSelected(location.pathname);
+  }, [location.pathname]);
 
   return (
-    <Navbar className="footer-navbar fixed-bottom" style={{ padding: 0, backgroundColor: '#010317' }}>
-      <Nav className="mx-auto d-flex align-items-center" style={{ width: '100%', justifyContent: 'space-around' }}>
-        <ButtonGroup>
-          {radios.map((radio, idx) => (
-            <ToggleButton
-              key={idx}
-              id={`radio-${idx}`}
-              type="radio"
-              name="radio"
-              value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={() => setRadioValue(radio.value)} // Atualiza o estado ao clicar
-              className={`custom-toggle-button ${radioValue === radio.value ? 'active' : ''}`} // Aplica a classe CSS personalizada
-              style={{ margin: '1px 3px' }}
-            >
-              <Link to={radio.to} style={{ color: '#ffffff', textDecoration: 'none' }}>
-                {radio.name}
-              </Link>
-            </ToggleButton>
-          ))}
-        </ButtonGroup>
-      </Nav>
-    </Navbar>
+    <footer className="bg-gray-800 text-white fixed bottom-0 w-full shadow-xl">
+      <nav className="flex flex-wrap justify-around p-3 md:p-4">
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className={`px-4 py-2 md:px-5 md:py-3 text-center rounded-full transition-transform duration-300 transform hover:scale-105 hover:shadow-lg no-underline ${
+              selected === link.path
+                ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white shadow-2xl'
+                : 'bg-orange-400 text-gray-800 hover:bg-orange-500'
+            }`}
+            onClick={() => setSelected(link.path)}
+          >
+            {link.name}
+          </Link>
+        ))}
+      </nav>
+    </footer>
   );
-}
+};
+
+export default Footer;

@@ -1,106 +1,136 @@
 import React, { useState } from 'react';
-import { Card, Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import '../App.css';
 import logo from "../img/Component 5.png";
 
 export default function Header() {
-  const [show, setShow] = useState(true); // Inicialmente, o header está visível
-  const [offcanvasShow, setOffcanvasShow] = useState(false); // Controle do Offcanvas
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleClose = () => setOffcanvasShow(false);
-  const handleShow = () => setOffcanvasShow(true);
-  const toggleHeaderVisibility = () => setShow(!show); // Alternar a visibilidade do header
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <>
-      {/* Condicionalmente renderiza o Header com base no estado 'show' */}
-      {show ? (
-        <Navbar expand="md" fixed="top" className="custom-navbar" style={{ color: "#ffffff", background: "#010317" }}>
-          <Container>
-            <Navbar.Brand>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Card style={{ border: 0 }}>
-                  <img
-                    width="150"
-                    height="50"
-                    src={logo}
-                    className="d-inline-block align-top"
-                    alt="Logo"
-                  />
-                </Card>
-                {/* Botão de fechamento apenas em telas menores */}
-                <Card
-                  className="d-none d-md-block" // Mostrar apenas em telas pequenas
-                  style={{ color: "#fff", backgroundColor: "#010317", justifyContent: "center", padding: "0px 20px", cursor: "pointer", marginLeft: "30px" }}
-                  onClick={toggleHeaderVisibility}
-                >
-                  x
-                </Card>
-              </div>
-            </Navbar.Brand>
-            <Navbar.Toggle
-              aria-controls="offcanvasNavbar"
-              style={{ color: "#010317", border: "none" }}
-              onClick={handleShow}
-              className="d-md-none" // Mostrar apenas em telas pequenas
-            >
-              <div className="container">
-                <label htmlFor="label-check" className="hamburger-label">
-                  <div className="line" style={{ backgroundColor: "#ffffff", height: "2px", width: "25px", marginBottom: "5px" }}></div>
-                  <div className="line" style={{ backgroundColor: "#ffffff", height: "2px", width: "25px", marginBottom: "5px" }}></div>
-                  <div className="line" style={{ backgroundColor: "#ffffff", height: "2px", width: "25px" }}></div>
-                </label>
-              </div>
-            </Navbar.Toggle>
-            <Navbar.Offcanvas
-              show={offcanvasShow}
-              onHide={handleClose}
-              id="offcanvasNavbar"
-              aria-labelledby="offcanvasNavbarLabel"
-              placement="end"
-              style={{ backgroundColor: "#ffffff", color: "black", width: '250px' }} // Ajustar largura se necessário
-              className="d-md-none" // Mostrar apenas em telas pequenas
-            >
-              <Offcanvas.Header closeButton style={{ color: "#010317" }}>
-                <Offcanvas.Title id="offcanvasNavbarLabel">
-                  Seja bem-vindo!
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="flex-column" style={{ fontSize: "20px", color: "#000000" }}>
-                  <Nav.Link style={{ color: "#000000" }} as={Link} to="/principal" onClick={handleClose}>Inicial</Nav.Link>
-                  <Nav.Link style={{ color: "#000000" }} as={Link} to="/perfil">Editar perfil</Nav.Link>
-                  <Nav.Link style={{ color: "#000000" }} as={Link} to="/agenda">Agenda</Nav.Link>
-                  <Nav.Link style={{ color: "#000000" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
-                  <Nav.Link style={{ color: "#000000" }} as={Link} to="/dashboard">Relatórios</Nav.Link>
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-            <Nav className="d-none d-md-flex flex-column">
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/principal">Inicial</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/perfil">Editar perfil</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/agenda">Agenda</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/conversas">Meus pacientes</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px" }} as={Link} to="/dashboard">Relatórios</Nav.Link>
-              <Nav.Link style={{ color: "#ffffff", fontSize: "20px", marginTop: "55vh"}} as={Link} to="/">Sair</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-      ) : (
-     
-        <div
-          onClick={toggleHeaderVisibility}
-          style={{ cursor: 'pointer', position: 'fixed', zIndex: 1000, backgroundColor: "#010317", minHeight: "100vh", padding: 13, width: "50px",justifyContent: "center"  }}
-          className="d-none d-md-block fixed-bottom-left"
-        >
-          <div className="line" style={{ backgroundColor: "#fff", top: '10px', left: '10px', height: "2px", width: "25px", marginBottom: "5px"}}></div>
-          <div className="line" style={{ backgroundColor: "#fff", top: '10px', left: '10px', height: "2px", width: "25px", marginBottom: "5px" }}></div>
-          <div className="line" style={{ backgroundColor: "#fff", top: '10px', left: '10px', height: "2px", width: "25px" }}></div>
+    <div className="relative">
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-[#010317] text-white transition-transform transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} z-40 shadow-lg ease-in-out duration-300`}
+      >
+        <div className="flex justify-between items-center p-4">
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-12 w-auto"
+          />
+          <button
+            onClick={toggleMenu}
+            className="text-white text-2xl"
+          >
+            ×
+          </button>
         </div>
-   
-      
-      )}
-    </>
+        <ul className="flex flex-col p-4 space-y-4 text-lg">
+          <li>
+            <Link
+              to="/principal"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Inicial
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/perfil"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Editar perfil
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/agenda"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Agenda
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/conversas"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Meus pacientes
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/dashboard"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Relatórios
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <div
+        className={`transition-all duration-300 ${isMenuOpen ? 'ml-64' : 'ml-0'} lg:ml-0`}
+      >
+        {/* Top header */}
+        <header className="bg-[#010317] text-white fixed top-0 left-0 w-full z-30 shadow-md">
+          <nav className="container mx-auto flex items-center justify-between p-4">
+            {/* Menu Button for all screens */}
+            <button
+              onClick={toggleMenu}
+              className={`flex items-center px-3 py-2 border border-white rounded text-white hover:text-gray-400 hover:border-gray-400 lg:hidden ${isMenuOpen ? 'hidden' : 'flex'}`}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+            {/* Logo */}
+            {!isMenuOpen && (
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-8 w-auto"
+              />
+            )}
+            {/* Open Button for large screens */}
+            {!isMenuOpen && (
+              <button
+                onClick={toggleMenu}
+                className="hidden lg:flex items-center px-3 py-2 border border-white rounded text-white hover:text-gray-400 hover:border-gray-400"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+              </button>
+            )}
+            
+          </nav>
+        </header>
+
+        {/* Page Content */}
+        <div className="pt-16">
+          {/* Your main content goes here */}
+        </div>
+      </div>
+    </div>
   );
 }
