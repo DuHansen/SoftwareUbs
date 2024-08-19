@@ -4,7 +4,6 @@ import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 
-
 export default function FormLogin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -14,14 +13,12 @@ export default function FormLogin() {
   async function handlerLogin(event){
     event.preventDefault();
   
-  
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, senha);
       const usuarioLogado = userCredential.user;
-      if(usuarioLogado.uid){
+      if (usuarioLogado.uid) {
         sessionStorage.setItem('uid', usuarioLogado.uid);
         alert('Usuário logado');
-        
         navigate('/principal');
       } 
       
@@ -31,7 +28,6 @@ export default function FormLogin() {
       console.error('Erro ao logar', error);
     }
   }
-  
   
   return (
     <Container>

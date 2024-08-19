@@ -7,15 +7,7 @@ import { Container } from "react-bootstrap";
 import "../../App.css";
 
 export default function Agenda() {
-
-    return(
-        
-            <Container style={{marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
-                   <h1>Agenda</h1>
-            </Container>
-    );
-
-  useEffect(() => {
+useEffect(() => {
     const cards = document.querySelectorAll('.card');
     const columns = document.querySelectorAll('.column');
 
@@ -48,7 +40,17 @@ export default function Agenda() {
         column.removeEventListener('touchend', touchEnd);
       });
     };
-  }, []);
+  }, []);return (
+    <Container style={{ marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh" }}>
+      <div className="column" id="column1">
+        <div className="card" draggable="true" id="card1">Card 1</div>
+      </div>
+      <div className="column" id="column2"></div>
+    </Container>
+  );
+    
+
+  
 
   function dragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.id);
@@ -102,13 +104,6 @@ export default function Agenda() {
     localStorage.setItem(cardId, columnId);
   }
 
-  return (
-    <Container style={{ marginTop: 100, alignItems: "center", justifyContent: "center", minHeight: "100vh" }}>
-      <div className="column" id="column1">
-        <div className="card" draggable="true" id="card1">Card 1</div>
-      </div>
-      <div className="column" id="column2"></div>
-    </Container>
-  );
+  
 
 }
