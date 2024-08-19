@@ -1,6 +1,6 @@
+import { Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import React, { useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LinearScale, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 
 // Registre os componentes necessários
 ChartJS.register(
@@ -80,8 +80,14 @@ const MeuGrafico = () => {
     };
   }, []);
 
-  // Retorne o componente Line com os dados e as opções
-  return <Line ref={chartRef} data={dados} options={opcoes} />;
+  return (
+    <div className="p-6 bg-[#fff]  shadow-md rounded-lg ">
+      <h2 className="text-lg font-semibold mb-4">Visitas ao Site</h2>
+      <div className="relative h-72">
+        <Line ref={chartRef} data={dados} options={opcoes} />
+      </div>
+    </div>
+  );
 };
 
 export default MeuGrafico;

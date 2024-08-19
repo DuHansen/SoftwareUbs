@@ -2,13 +2,27 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../img/Component 5.png";
 
+const HamburgerIcon = () => (
+  <svg
+    className="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line x1="3" y1="6" x2="21" y2="6" stroke="white" strokeWidth="2" />
+    <line x1="3" y1="12" x2="21" y2="12" stroke="white" strokeWidth="2" />
+    <line x1="3" y1="18" x2="21" y2="18" stroke="white" strokeWidth="2" />
+  </svg>
+);
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div className="relative">
+    <div className="relative flex">
       {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-[#010317] text-white transition-transform transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} z-40 shadow-lg ease-in-out duration-300`}
@@ -30,7 +44,7 @@ export default function Header() {
           <li>
             <Link
               to="/principal"
-              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Inicial
@@ -39,7 +53,7 @@ export default function Header() {
           <li>
             <Link
               to="/perfil"
-              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Editar perfil
@@ -48,7 +62,7 @@ export default function Header() {
           <li>
             <Link
               to="/agenda"
-              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Agenda
@@ -57,7 +71,7 @@ export default function Header() {
           <li>
             <Link
               to="/conversas"
-              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Meus pacientes
@@ -66,7 +80,7 @@ export default function Header() {
           <li>
             <Link
               to="/dashboard"
-              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors"
+              className="block px-3 py-2 text-white hover:bg-gray-700 rounded transition-colors no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Relatórios
@@ -77,7 +91,7 @@ export default function Header() {
 
       {/* Main Content */}
       <div
-        className={`transition-all duration-300 ${isMenuOpen ? 'ml-64' : 'ml-0'} lg:ml-0`}
+        className={`flex-1 transition-all duration-300 ${isMenuOpen ? 'ml-64' : 'ml-0'}`}
       >
         {/* Top header */}
         <header className="bg-[#010317] text-white fixed top-0 left-0 w-full z-30 shadow-md">
@@ -85,51 +99,25 @@ export default function Header() {
             {/* Menu Button for all screens */}
             <button
               onClick={toggleMenu}
-              className={`flex items-center px-3 py-2 border border-white rounded text-white hover:text-gray-400 hover:border-gray-400 lg:hidden ${isMenuOpen ? 'hidden' : 'flex'}`}
+              className={`flex items-center px-3 py-2 text-white lg:hidden ${isMenuOpen ? 'hidden' : 'flex'}`}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
+              <HamburgerIcon />
             </button>
             {/* Logo */}
-            {!isMenuOpen && (
-              <img
-                src={logo}
-                alt="Logo"
-                className="h-8 w-auto"
-              />
-            )}
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-8 w-auto"
+            />
             {/* Open Button for large screens */}
-            {!isMenuOpen && (
-              <button
-                onClick={toggleMenu}
-                className="hidden lg:flex items-center px-3 py-2 border border-white rounded text-white hover:text-gray-400 hover:border-gray-400"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-              </button>
-            )}
-            
+            <button
+              onClick={toggleMenu}
+              className="hidden lg:flex items-center px-3 py-2 text-white"
+            >
+              <HamburgerIcon />
+            </button>
           </nav>
         </header>
-
-        {/* Page Content */}
-        <div className="pt-16">
-          {/* Your main content goes here */}
-        </div>
       </div>
     </div>
   );
