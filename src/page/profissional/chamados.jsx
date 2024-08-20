@@ -1,6 +1,8 @@
 import AOS from 'aos';
 import React, { useEffect, useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import 'aos/dist/aos.css'; // Certifique-se de que o CSS do AOS está importado
+import 'tailwindcss/tailwind.css'; // Certifique-se de que o Tailwind CSS está importado
 
 const Contatos = () => {
     const [contatos, setContatos] = useState([]);
@@ -15,9 +17,9 @@ const Contatos = () => {
     const fetchContatos = async () => {
         setLoading(true); // Inicia o carregamento
         try {
-            const sessionName = localStorage.getItem('uid'); // Obtém o nome da sessão do localStorage
+            const sessionName = sessionStorage.getItem('uid'); // Obtém o nome da sessão do sessionStorage
             if (!sessionName) {
-                console.error('Nome da sessão não encontrado no localStorage');
+                console.error('Nome da sessão não encontrado no sessionStorage');
                 setContatos([]); // Define contatos como vazio se o sessionName não estiver presente
                 return;
             }
@@ -48,53 +50,64 @@ const Contatos = () => {
     };
 
     if (loading) {
-        return <div>Carregando...</div>; // Indicador de carregamento
+        return <div className="text-center text-white">Carregando...</div>; // Indicador de carregamento
     }
 
     return (
-        <div id="contatos" className="bg-[#010317] mt-[8vh] sm:mt-[9vh] lg:mt-[10vh]">
-            <Container className="flex flex-col items-center min-h-screen p-4 overflow-hidden">
+        <div id="contatos" className="bg-[#010317] mt-12 sm:mt-9">
+            <Container className="flex flex-col items-center min-h-screen p-4 overflow-x-auto">
                 <div className="w-full flex justify-center">
                     <h2
-                        className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-maincolor mb-8 text-center"
+                        className="mt-10 text-xxs sm:text-xs md:text-sm lg:text-base font-bold text-maincolor mb-4 sm:mb-6 md:mb-8 lg:mb-10 text-center"
                         data-aos="fade-up"
                     >
                         Chamados abertos
                     </h2>
                 </div>
 
-                <Table striped bordered hover variant="dark" data-aos="fade-up">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Última Mensagem</th>
-                            <th>Horário</th>
-                            <th>Telefone</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {contatos.length > 0 ? (
-                            contatos.map(({ nome, ultimaMensagem, horario, telefone }, index) => (
-                                <tr key={index}>
-                                    <td>{nome}</td>
-                                    <td>{ultimaMensagem}</td>
-                                    <td>{horario}</td>
-                                    <td>{telefone}</td>
-                                    <td>
-                                        <button onClick={() => handleCardClick(telefone)} className="btn btn-primary">
-                                            Abrir no WhatsApp
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+                <div className="w-full overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-800 bg-gray-900 text-white">
+                        <thead className="bg-gray-800">
                             <tr>
-                                <td colSpan="5">Nenhum contato encontrado.</td>
+                                <th className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-gray-400 uppercase tracking-wider">Nome</th>
+                                <th className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-gray-400 uppercase tracking-wider">Última Mensagem</th>
+                                <th className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-gray-400 uppercase tracking-wider">Horário</th>
+                                <th className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-gray-400 uppercase tracking-wider">Telefone</th>
+                                <th className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-gray-400 uppercase tracking-wider">Ação</th>
                             </tr>
-                        )}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody className="divide-y divide-gray-800">
+                            {contatos.length > 0 ? (
+                                contatos.map(({ nome, ultimaMensagem, horario, telefone }, index) => (
+                                    <tr key={index} className="hover:bg-gray-700">
+                                        <td className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base font-medium text-white">{nome}</td>
+                                        <td className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base text-gray-400">{ultimaMensagem}</td>
+                                        <td className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base text-gray-400">{horario}</td>
+                                        <td className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base text-gray-400">{telefone}</td>
+                                        <td className="px-1 py-0.5 text-xxs sm:text-xs md:text-sm lg:text-base text-gray-400 flex space-x-1">
+                                            <button 
+                                                onClick={() => handleCardClick(telefone)} 
+                                                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-0.5 px-1 rounded text-xxs sm:text-xs md:text-sm lg:text-base"
+                                            >
+                                                Abrir no WhatsApp
+                                            </button>
+                                            <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-0.5 px-1 rounded text-xxs sm:text-xs md:text-sm lg:text-base">
+                                              Add
+                                            </button>
+                                            <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-0.5 px-1 rounded text-xxs sm:text-xs md:text-sm lg:text-base">
+                                              X
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5" className="px-1 py-0.5 text-center text-xxs sm:text-xs md:text-sm lg:text-base text-gray-400">Nenhum contato encontrado.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </Container>
         </div>
     );
