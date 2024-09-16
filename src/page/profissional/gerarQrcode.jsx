@@ -1,46 +1,66 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 export default function QrCode() {
+    const { onConnected } = useOutletContext(); // Receber o onConnected via contexto
     const [qrCodeUrl, setQrCodeUrl] = useState('');
     const [sessionName, setSessionName] = useState('');
-    const [loading, setLoading] = useState(false); // Estado para controle do carregamento
+    const [loading, setLoading] = useState(false);
+    const [isButton, setIsButton] = useState(true); // Estado adicional para o botão
+    const [showFooter, setShowFooter] = useState(false); // Estado para controlar a exibição do footer
+    const [isConnected, setIsConnected] = useState(false); // Novo estado para controlar conexão bem-sucedida
 
-
-    // Carregar o UID do sessionStorage ao montar o componente
     useEffect(() => {
-        const savedSessionName = sessionStorage.getItem('uid');
+        const savedSessionName = localStorage.getItem('sessionName'); // Recupera do localStorage
         if (savedSessionName) {
             setSessionName(savedSessionName);
         }
     }, []);
 
-    const fetchQrCode = async () => {
-        setLoading(true); // Inicia o carregamento
+    useEffect(() => {
+        // Atualizar o footer quando voltar ao estado de botão após loading ou qrCodeUrl
+        if (isButton && showFooter) {
+            onConnected(true); // Notificar que a conexão foi bem-sucedida
+            setIsConnected(true); // Atualizar o estado de conexão bem-sucedida
+            setShowFooter(false); // Resetar o estado para não mostrar o footer novamente
+        }
+    }, [isButton, showFooter, onConnected]);
+
+    const fetchQrCode = async (e) => {
+        e.preventDefault(); // Previne o comportamento padrão do formulário
+        setLoading(true);
+        setIsButton(false); // Muda o estado para não botão
+        setShowFooter(true); // Indicar que o footer deve ser mostrado quando voltar para botão
         try {
-            const response = await axios.post('http://localhost:8000/connect/gerar', { sessionName });
-            console.log('Resposta do servidor:', response.data);
-            
-            const base64Image = response.data.startsWith('data:image/png;base64,') 
-                ? response.data 
-                : `data:image/png;base64,${response.data}`;
-            
-            setQrCodeUrl(base64Image);
-            
-            // Salvar o nome da sessão no localStorage (não necessário se sessionName é o UID)
-            localStorage.setItem('sessionName', sessionName);
-            
-         
+            const response = await axios.post('http://localhost:8080/connect/gerar', { sessionName });
+
+            // Log para verificar o formato de response.data
+            console.log('Response:', response.data);
+
+            // Verifica se a resposta contém um campo 'contacts'
+            if (response.data && response.data.contacts) {
+                // Presumindo que o QR Code é uma string base64 na resposta
+                const qrCode = response.data.contacts[0]?.qrCode; // Ajuste conforme a estrutura real do seu objeto
+                if (qrCode) {
+                    const base64Image = qrCode.startsWith('data:image/png;base64,')
+                        ? qrCode
+                        : `data:image/png;base64,${qrCode}`;
+                    
+                    setQrCodeUrl(base64Image);
+                    localStorage.setItem('sessionName', sessionName); // Atualizar o nome da sessão no localStorage
+                } else {
+                    console.error('QR Code não encontrado na resposta:', response.data);
+                }
+            } else {
+                console.error('Resposta inesperada do servidor:', response.data);
+            }
         } catch (error) {
             console.error('Error fetching QR code:', error);
         } finally {
-            setLoading(false); // Finaliza o carregamento
+            setLoading(false);
+            setIsButton(true); // Retorna ao estado de botão
         }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetchQrCode();
     };
 
     return (
@@ -60,8 +80,10 @@ export default function QrCode() {
                         className="max-w-full h-auto"
                     />
                 </div>
+            ) : isConnected ? ( // Mostrar mensagem de sucesso ao invés do botão
+                <div className="text-green-500 text-xl font-bold">Conectado com sucesso!</div>
             ) : (
-                <form onSubmit={handleSubmit} className="w-full max-w-md text-center">
+                <form onSubmit={fetchQrCode} className="w-full max-w-md text-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                         Conectar
                     </button>

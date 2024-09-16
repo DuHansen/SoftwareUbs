@@ -22,7 +22,7 @@ export default function Login() {
   }
   return (
     <Container
-      fluid
+     
       className="d-flex align-items-center justify-content-center"
       style={{height: "100vh", minHeight: "100vh", backgroundColor: '#ffffff', alignItems: "center", justifyContent: "center"}}
     >

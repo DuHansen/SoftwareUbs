@@ -13,7 +13,7 @@ export default function Layout() {
           {/* Primeiro cartão */}
           <Col lg={6} md={12} className="mb-4">
             <Link to="/conversas" className="text-decoration-none">
-              <Card className="d-flex h-100 text-white cursor-pointer shadow-lg transition-colors" style={{ background: "linear-gradient(to right, orange, white)", border: "none" }}>
+              <Card className="d-flex h-100 text-white cursor-pointer shadow-lg transition-colors" style={{ background: "orange", border: "none" }}>
                 <Card.Body className="d-flex align-items-center justify-content-center h-100">
                   <div className="d-flex align-items-center">
                     <BiConversation className="me-2" style={{ fontSize: '2rem' }} />
@@ -26,7 +26,7 @@ export default function Layout() {
           {/* Segundo cartão */}
           <Col lg={6} md={12} className="mb-4">
             <Link to="/agenda" className="text-decoration-none">
-              <Card className="d-flex h-100 text-white cursor-pointer shadow-lg transition-colors" style={{ background: "linear-gradient(to right, pink, white)", border: "none" }}>
+              <Card className="d-flex h-100 text-white cursor-pointer shadow-lg transition-colors" style={{ background: "pink", border: "none" }}>
                 <Card.Body className="d-flex align-items-center justify-content-center h-100">
                   <div className="d-flex align-items-center">
                     <TfiAgenda className="me-2" style={{ fontSize: '2rem' }} />
